@@ -1,167 +1,194 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вводный инструктаж БП</title>
-    <style>
-        body {
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: black;
-            user-select: none;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-        .video-wrapper {
-            position: relative;
-            width: 100vw;
-            height: 56.25vw;
-            max-height: 80vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            max-width: 100vw;
-            max-height: 80vh;
-            border: none;
-            pointer-events: none;
-        }
-        .controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-            padding: 10px;
-            width: 100%;
-            max-width: 500px;
-        }
-        .controls button, .controls input[type='range'] {
-            padding: 10px 15px;
-            font-size: 14px;
-            border: none;
-            background-color: #ffcc00;
-            cursor: pointer;
-            border-radius: 5px;
-            flex: 1;
-            min-width: 80px;
-        }
-        .controls button:hover {
-            background-color: #e6b800;
-        }
-        .volume-slider {
-            width: 100%;
-            max-width: 200px;
-        }
-        @media (max-width: 600px) {
-            body {
-                height: auto;
-                min-height: 100vh;
-                display: block;
-                overflow-y: auto;
-            }
-            .video-wrapper {
-                width: 100vw;
-                height: auto;
-                max-height: 50vh;
-            }
-            iframe {
-                width: 100%;
-                height: 100%;
-            }
-            .controls {
-                flex-direction: column;
-                align-items: center;
-                padding-bottom: 20px;
-            }
-            .controls button {
-                width: 80%;
-            }
-            .volume-slider {
-                width: 80%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вводный инструктаж БП</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: black;
+      user-select: none;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    .video-wrapper {
+      position: relative;
+      width: 100vw;
+      height: 56.25vw;
+      max-height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      max-width: 100vw;
+      max-height: 80vh;
+      border: none;
+      pointer-events: none;
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      padding: 10px;
+      width: 100%;
+      max-width: 500px;
+    }
+    .controls button, .controls input[type='range'] {
+      padding: 10px 15px;
+      font-size: 14px;
+      border: none;
+      background-color: #ffcc00;
+      cursor: pointer;
+      border-radius: 5px;
+      flex: 1;
+      min-width: 80px;
+    }
+    .controls button:hover {
+      background-color: #e6b800;
+    }
+    .volume-slider {
+      width: 100%;
+      max-width: 200px;
+    }
+    @media (max-width: 600px) {
+      body {
+        height: auto;
+        min-height: 100vh;
+        display: block;
+        overflow-y: auto;
+      }
+      .video-wrapper {
+        width: 100vw;
+        height: auto;
+        max-height: 50vh;
+      }
+      iframe {
+        width: 100%;
+        height: 100%;
+      }
+      .controls {
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 20px;
+      }
+      .controls button {
+        width: 80%;
+      }
+      .volume-slider {
+        width: 80%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="video-wrapper">
-        <iframe id="rutubePlayer"
-            src="https://rutube.ru/play/embed/a96d9258e7219d84047eb244cf22fda8/?p=hvbstFd3BdwRs-gZhadOiA"
-            frameborder="0"
-            allow="clipboard-write; autoplay"
-            webkitallowfullscreen
-            mozallowfullscreen
-            allowfullscreen>
-        </iframe>
-    </div>
+  <div class="video-wrapper">
+    <iframe id="rutubePlayer"
+      src="https://rutube.ru/play/embed/a96d9258e7219d84047eb244cf22fda8/?p=hvbstFd3BdwRs-gZhadOiA"
+      frameborder="0"
+      allow="clipboard-write; autoplay"
+      webkitallowfullscreen
+      mozallowfullscreen
+      allowfullscreen>
+    </iframe>
+  </div>
 
-    <div class="controls">
-        <button onclick="togglePlay()">▶ / ⏸</button>
-        <button onclick="sendCommand('player:relativelySeek', { time: -10 })">⏪ Назад 10 сек</button>
-        <button onclick="sendCommand('player:mute')">🔇 Откл. звук</button>
-        <button onclick="sendCommand('player:unMute')">🔊 Вкл. звук</button>
-        <input type="range" class="volume-slider" min="0" max="1" step="0.1" value="1" oninput="changeVolume(this.value)">
-    </div>
+  <div class="controls">
+    <button onclick="togglePlay()">▶ / ⏸</button>
+    <button onclick="sendCommand('player:relativelySeek', { time: -10 })">⏪ Назад 10 сек</button>
+    <button onclick="sendCommand('player:mute')">🔇 Откл. звук</button>
+    <button onclick="sendCommand('player:unMute')">🔊 Вкл. звук</button>
+    <input
+      type="range"
+      class="volume-slider"
+      min="0"
+      max="1"
+      step="0.1"
+      value="1"
+      oninput="changeVolume(this.value)"
+    >
+  </div>
 
-    <script>
-        let player = document.getElementById("rutubePlayer");
-        let lastTime = localStorage.getItem("videoTime") ? parseFloat(localStorage.getItem("videoTime")) : 0;
-        let isPlaying = false;
+  <script>
+    const player = document.getElementById("rutubePlayer");
+    let lastTime = parseFloat(localStorage.getItem("videoTime") || 0);
+    let isPlaying = false;
+    let videoDuration = 0;
+    let pollInterval;
 
-        function sendCommand(command, data = {}) {
-            player.contentWindow.postMessage(JSON.stringify({ type: command, data: data }), '*');
-        }
+    function sendCommand(command, data = {}) {
+      player.contentWindow.postMessage(JSON.stringify({ type: command, data }), '*');
+    }
 
-        function togglePlay() {
-            isPlaying = !isPlaying;
-            sendCommand(isPlaying ? 'player:play' : 'player:pause');
-        }
+    function togglePlay() {
+      isPlaying = !isPlaying;
+      sendCommand(isPlaying ? 'player:play' : 'player:pause');
+    }
 
-        function changeVolume(value) {
-            sendCommand('player:setVolume', { volume: parseFloat(value) });
-        }
+    function changeVolume(value) {
+      sendCommand('player:setVolume', { volume: parseFloat(value) });
+    }
 
-        window.addEventListener('message', function (event) {
-            let message;
-            try {
-                message = JSON.parse(event.data);
-            } catch (e) {
-                return;
-            }
+    window.addEventListener('message', event => {
+      let msg;
+      try {
+        msg = JSON.parse(event.data);
+      } catch {
+        return;
+      }
 
-            if (message.type === 'player:currentTime') {
-                let currentTime = message.data.time;
-                if (currentTime > lastTime + 2) {
-                    sendCommand('player:setCurrentTime', { time: lastTime });
-                } else {
-                    lastTime = currentTime;
-                }
-                localStorage.setItem("videoTime", lastTime);
-            }
+      switch (msg.type) {
+        case 'player:duration':
+          videoDuration = msg.data.duration;
+          break;
 
-            if (message.type === 'player:changeState' && message.data.state === 'stopped') {
-                window.location.href = "https://onlinetestpad.com/vtxeugjagxxcy";
-            }
-        });
+        case 'player:currentTime':
+          const currentTime = msg.data.time;
+          if (currentTime > lastTime + 2) {
+            sendCommand('player:setCurrentTime', { time: lastTime });
+          } else {
+            lastTime = currentTime;
+          }
+          localStorage.setItem("videoTime", lastTime);
 
-        setInterval(() => {
-            sendCommand('player:currentTime');
-        }, 1000);
+          if (videoDuration > 0 && currentTime >= videoDuration - 1) {
+            clearInterval(pollInterval);
+            window.location.href = "https://onlinetestpad.com/vtxeugjagxxcy";
+          }
+          break;
 
-        window.addEventListener("load", function () {
-            if (lastTime > 0) {
-                sendCommand('player:setCurrentTime', { time: lastTime });
-            }
-        });
-    </script>
+        case 'player:changeState':
+          if (msg.data.state === 'stopped') {
+            clearInterval(pollInterval);
+            window.location.href = "https://onlinetestpad.com/vtxeugjagxxcy";
+          }
+          break;
+      }
+    });
+
+    pollInterval = setInterval(() => {
+      sendCommand('player:currentTime');
+      sendCommand('player:getDuration');
+    }, 1000);
+
+    window.addEventListener("load", () => {
+      if (lastTime > 0) {
+        sendCommand('player:setCurrentTime', { time: lastTime });
+        sendCommand('player:play');  // автозапуск при возврате
+        isPlaying = true;
+      }
+    });
+  </script>
 </body>
 </html>
